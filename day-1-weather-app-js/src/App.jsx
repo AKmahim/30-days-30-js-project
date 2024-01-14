@@ -10,14 +10,16 @@ import Swal from 'sweetalert2'
 
 function App() {
   const [city,setCity] = useState('dhaka');
-  const [weather,setWeather] = useState([])
+  const [weather,setWeather] = useState([]);
+  const openWeatherKey = process.env.APIKEY;
+  console.log(openWeatherKey);
 
   const handleSearchByCity = (city)=>{
     setCity(city);
   }
 
   useEffect(()=>{
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=open-weather-key&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${openWeatherKey}&units=metric`)
       .then(res => res.json())
       .then(data=> setWeather(data))
   },[city])
